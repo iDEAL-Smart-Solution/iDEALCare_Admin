@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="idealFaviconGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B7A75" />
+      <stop offset="100%" stop-color="#043835" />
+    </linearGradient>
+    <linearGradient id="ecgGlow" x1="12" y1="32" x2="52" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3CC3BA" />
+      <stop offset="50%" stop-color="#A7F3D0" />
+      <stop offset="100%" stop-color="#3CC3BA" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Base with Rounded Corner Squircle -->
+  <rect width="64" height="64" rx="16" fill="url(#idealFaviconGrad)" />
+  <rect x="1" y="1" width="62" height="62" rx="15" stroke="rgba(255, 255, 255, 0.22)" stroke-width="1.5" />
+
+  <!-- Medical Cross Elements -->
+  <!-- "i" Dot for iDEAL -->
+  <circle cx="32" cy="15" r="4" fill="#FFFFFF" />
+
+  <!-- Vertical Cross Stem -->
+  <rect x="27.5" y="22" width="9" height="28" rx="4.5" fill="#FFFFFF" />
+
+  <!-- Horizontal Cross Arms -->
+  <rect x="14" y="27.5" width="36" height="9" rx="4.5" fill="#FFFFFF" />
+
+  <!-- Dynamic ECG Vital Pulse Wave -->
+  <!-- Shadow/Dark contour line -->
+  <path
+    d="M 11 32 L 23 32 L 27.5 19 L 32 44 L 36.5 24 L 40.5 32 L 53 32"
+    stroke="#042C2A"
+    stroke-width="3.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Glowing Pulse Core -->
+  <path
+    d="M 11 32 L 23 32 L 27.5 19 L 32 44 L 36.5 24 L 40.5 32 L 53 32"
+    stroke="url(#ecgGlow)"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

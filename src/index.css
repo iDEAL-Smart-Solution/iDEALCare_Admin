@@ -1,0 +1,595 @@
+/* src/index.css — iDEAL Care Platform Admin Design System */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Light Mode Tokens (Default) ────────────────────────────────────────── */
+:root {
+  /* Brand Accent Tokens */
+  --accent: #0B7A75;
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, white);
+  --on-accent: #FFFFFF;
+
+  /* Surfaces & Foundation */
+  --bg: #F7F9FA;
+  --surface: #FFFFFF;
+  --surface-elevated: #F0F4F7;
+  --surface-hover: #E8EEF3;
+  --border: #DDE3E8;
+
+  /* Typography */
+  --text-h: #0F1B2A;
+  --text: #1F2A37;
+  --text-muted: #5B6776;
+
+  /* Status Colors */
+  --success: #15803D;  --success-bg: #E8F5EC;  --success-fg: #14532D;
+  --warning: #B45309;  --warning-bg: #FEF3C7;  --warning-fg: #78350F;
+  --danger:  #B91C1C;  --danger-bg:  #FDECEC;  --danger-fg:  #7F1D1D;
+  --info:    #1D4ED8;  --info-bg:    #E8EEFD;  --info-fg:    #1E3A8A;
+
+  /* Legacy & Component Aliases */
+  --brand-primary: var(--accent);
+  --brand-primary-hover: var(--accent-hover);
+  --brand-primary-light: var(--accent-soft);
+  --brand-accent: var(--accent);
+  --brand-gradient: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 75%, #0F1B2A) 100%);
+  --brand-gradient-glow: 0 4px 20px color-mix(in srgb, var(--accent) 25%, transparent);
+
+  --bg-app: var(--bg);
+  --bg-sidebar: var(--surface);
+  --bg-surface: var(--surface);
+  --bg-surface-elevated: var(--surface-elevated);
+  --bg-surface-hover: var(--surface-hover);
+  --bg-glass: color-mix(in srgb, var(--surface) 90%, transparent);
+
+  --border-subtle: var(--border);
+  --border-focus: var(--accent);
+  --border-glass: var(--border);
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-primary: var(--text);
+  --text-secondary: var(--text-muted);
+  --text-inverse: var(--on-accent);
+
+  --status-active: var(--success);
+  --status-active-bg: var(--success-bg);
+  --status-active-fg: var(--success-fg);
+  --status-active-border: var(--success);
+
+  --status-pending: var(--warning);
+  --status-pending-bg: var(--warning-bg);
+  --status-pending-fg: var(--warning-fg);
+  --status-pending-border: var(--warning);
+
+  --status-expired: var(--danger);
+  --status-expired-bg: var(--danger-bg);
+  --status-expired-fg: var(--danger-fg);
+  --status-expired-border: var(--danger);
+
+  --status-suspended: var(--text-muted);
+  --status-suspended-bg: var(--surface-elevated);
+  --status-suspended-border: var(--border);
+
+  --shadow-sm: 0 1px 2px rgba(15, 27, 42, 0.05);
+  --shadow-md: 0 4px 12px rgba(15, 27, 42, 0.08);
+  --shadow-lg: 0 12px 32px rgba(15, 27, 42, 0.12);
+
+  --sidebar-width: 260px;
+  --header-height: 70px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Dark Mode Tokens (prefers-color-scheme OR [data-theme='dark']) ─────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --accent: #3CC3BA;
+    --accent-hover: color-mix(in srgb, var(--accent) 85%, white);
+    --accent-soft: color-mix(in srgb, var(--accent) 15%, #0F1720);
+    --on-accent: #04201E;
+
+    --bg: #0F1720;
+    --surface: #16202B;
+    --surface-elevated: #1C2836;
+    --surface-hover: #223243;
+    --border: #2A3644;
+
+    --text-h: #F3F6F9;
+    --text: #E6EBF0;
+    --text-muted: #9AA7B5;
+
+    --success: #4ADE80;  --success-bg: #12301F;  --success-fg: #BBF7D0;
+    --warning: #FBBF24;  --warning-bg: #3A2A0A;  --warning-fg: #FDE68A;
+    --danger:  #F87171;  --danger-bg:  #3A1517;  --danger-fg:  #FECACA;
+    --info:    #60A5FA;  --info-bg:    #14233F;  --info-fg:    #BFDBFE;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.6);
+  }
+}
+
+[data-theme='dark'] {
+  --accent: #3CC3BA;
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, white);
+  --accent-soft: color-mix(in srgb, var(--accent) 15%, #0F1720);
+  --on-accent: #04201E;
+
+  --bg: #0F1720;
+  --surface: #16202B;
+  --surface-elevated: #1C2836;
+  --surface-hover: #223243;
+  --border: #2A3644;
+
+  --text-h: #F3F6F9;
+  --text: #E6EBF0;
+  --text-muted: #9AA7B5;
+
+  --success: #4ADE80;  --success-bg: #12301F;  --success-fg: #BBF7D0;
+  --warning: #FBBF24;  --warning-bg: #3A2A0A;  --warning-fg: #FDE68A;
+  --danger:  #F87171;  --danger-bg:  #3A1517;  --danger-fg:  #FECACA;
+  --info:    #60A5FA;  --info-bg:    #14233F;  --info-fg:    #BFDBFE;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme='light'] {
+  --accent: #0B7A75;
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, black);
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, white);
+  --on-accent: #FFFFFF;
+
+  --bg: #F7F9FA;
+  --surface: #FFFFFF;
+  --surface-elevated: #F0F4F7;
+  --surface-hover: #E8EEF3;
+  --border: #DDE3E8;
+
+  --text-h: #0F1B2A;
+  --text: #1F2A37;
+  --text-muted: #5B6776;
+
+  --success: #15803D;  --success-bg: #E8F5EC;  --success-fg: #14532D;
+  --warning: #B45309;  --warning-bg: #FEF3C7;  --warning-fg: #78350F;
+  --danger:  #B91C1C;  --danger-bg:  #FDECEC;  --danger-fg:  #7F1D1D;
+  --info:    #1D4ED8;  --info-bg:    #E8EEFD;  --info-fg:    #1E3A8A;
+}
+
+/* ── Reset & Global Settings ────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-h);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+h1 { font-size: 1.875rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+
+p {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: var(--transition);
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Form Controls */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* ── Buttons (Matching Pill Button in Mockup) ───────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--on-accent);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+  border-color: var(--border);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: var(--accent-soft);
+}
+
+.btn-danger {
+  background-color: var(--danger-bg);
+  color: var(--danger-fg);
+  border: 1px solid var(--danger);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--danger);
+  color: #ffffff;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+  color: var(--text);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 0.8125rem;
+}
+
+.btn-lg {
+  padding: 12px 26px;
+  font-size: 1rem;
+}
+
+/* ── Badges & Status Pills (Matching Image) ──────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.78125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+}
+
+/* Green: Paid / Active */
+.badge-active,
+.badge-paid {
+  background-color: var(--success-bg);
+  color: var(--success-fg);
+  border: 1px solid transparent;
+}
+
+/* Amber: Pending / Warning */
+.badge-pending,
+.badge-warning {
+  background-color: var(--warning-bg);
+  color: var(--warning-fg);
+  border: 1px solid transparent;
+}
+
+/* Red: Overdue / Expired */
+.badge-expired,
+.badge-overdue,
+.badge-danger {
+  background-color: var(--danger-bg);
+  color: var(--danger-fg);
+  border: 1px solid transparent;
+}
+
+/* Blue: Info */
+.badge-info {
+  background-color: var(--info-bg);
+  color: var(--info-fg);
+  border: 1px solid transparent;
+}
+
+/* Teal: Assigned / Default */
+.badge-assigned,
+.badge-default {
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid transparent;
+}
+
+/* Grey: Suspended */
+.badge-suspended {
+  background-color: var(--surface-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* ── Cards & Surfaces ────────────────────────────────────────────────────── */
+.glass-card, .card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.glass-card:hover, .card:hover {
+  border-color: color-mix(in srgb, var(--border) 70%, var(--accent));
+}
+
+/* ── Alert & Notice Banners (Matching Image Expired Banner) ───────────────── */
+.alert, .banner {
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.alert a, .banner a {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.alert-warning, .banner-warning {
+  background-color: var(--warning-bg);
+  border: 1px solid var(--warning);
+  color: var(--warning-fg);
+}
+.alert-warning a, .banner-warning a {
+  color: var(--warning-fg);
+}
+
+.alert-danger, .banner-danger {
+  background-color: var(--danger-bg);
+  border: 1px solid var(--danger);
+  color: var(--danger-fg);
+}
+.alert-danger a, .banner-danger a {
+  color: var(--danger-fg);
+}
+
+.alert-success, .banner-success {
+  background-color: var(--success-bg);
+  border: 1px solid var(--success);
+  color: var(--success-fg);
+}
+.alert-success a, .banner-success a {
+  color: var(--success-fg);
+}
+
+.alert-info, .banner-info {
+  background-color: var(--info-bg);
+  border: 1px solid var(--info);
+  color: var(--info-fg);
+}
+.alert-info a, .banner-info a {
+  color: var(--info-fg);
+}
+
+/* ── Data Tables ─────────────────────────────────────────────────────────── */
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.data-table th {
+  background-color: var(--surface-elevated);
+  padding: 14px 18px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tr:hover td {
+  background-color: var(--surface-hover);
+}
+
+/* Spinners */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Modern Medical Platform Styles & Animations ── */
+@keyframes cardiacPulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  14% { transform: scale(1.15); opacity: 1; }
+  28% { transform: scale(1); opacity: 0.9; }
+  42% { transform: scale(1.1); opacity: 1; }
+  70% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.cardiac-pulse {
+  animation: cardiacPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ecgDraw {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ecg-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: ecgDraw 4s linear infinite;
+}
+
+@keyframes liveBeaconPing {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(74, 222, 128, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+  }
+}
+
+.live-beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  animation: liveBeaconPing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  display: inline-block;
+}
+
+.medical-grid-pattern {
+  background-size: 28px 28px;
+  background-image: 
+    linear-gradient(to right, color-mix(in srgb, var(--accent) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--accent) 8%, transparent) 1px, transparent 1px);
+}
+
