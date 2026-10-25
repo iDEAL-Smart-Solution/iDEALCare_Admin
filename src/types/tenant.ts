@@ -62,4 +62,5 @@ export interface CreateTenantRequest {
   };
   nursingCareBillsRefundableByDefault: boolean;
   registrationFeeAmount: number;
+  logo?: File;
 }

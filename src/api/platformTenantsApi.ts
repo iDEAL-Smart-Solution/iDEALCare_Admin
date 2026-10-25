@@ -30,7 +30,21 @@ export const platformTenantsApi = {
   },
 
   async createTenant(data: CreateTenantRequest): Promise<TenantDetail> {
-    const response = await apiClient.post<TenantDetail>('/api/platform/tenants', data);
+    const { logo, ...tenantData } = data;
+    let logoUrl: string | undefined;
+    if (logo) {
+      const form = new FormData();
+      form.append('logo', logo);
+      const uploaded = await apiClient.post<{ logoUrl: string }>('/api/platform/tenants/logo', form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      logoUrl = uploaded.data.logoUrl;
+    }
+
+    const response = await apiClient.post<TenantDetail>('/api/platform/tenants', {
+      ...tenantData,
+      logoUrl,
+    });
     return response.data;
   },
 

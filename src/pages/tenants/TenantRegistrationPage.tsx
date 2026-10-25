@@ -55,6 +55,7 @@ export const TenantRegistrationPage: React.FC = () => {
   });
 
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
+  const [logoFile, setLogoFile] = useState<File | null>(null);
 
   React.useEffect(() => {
     platformSubscriptionsApi.getPlans().then((loadedPlans) => {
@@ -100,6 +101,10 @@ export const TenantRegistrationPage: React.FC = () => {
     if (step === 1) {
       if (!formData.name.trim()) {
         setError('Healthcare Provider name is required.');
+        return;
+      }
+      if (!logoFile) {
+        setError('Please upload the healthcare provider logo.');
         return;
       }
       if (!formData.subdomain.trim() || formData.subdomain.length < 3) {
@@ -152,6 +157,7 @@ export const TenantRegistrationPage: React.FC = () => {
         country: formData.country,
         nursingCareBillsRefundableByDefault: formData.nursingCareBillsRefundableByDefault,
         registrationFeeAmount: Number(formData.registrationFeeAmount) || 0,
+        logo: logoFile ?? undefined,
         initialPlanId: formData.initialPlanId?.trim() ? formData.initialPlanId.trim() : undefined,
         billingFrequency: formData.billingFrequency,
         owner: {
@@ -389,6 +395,21 @@ export const TenantRegistrationPage: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, legalName: e.target.value })}
                 />
               </div>
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label className="form-label" htmlFor="tenant-logo">Healthcare Provider Logo *</label>
+              <input
+                id="tenant-logo"
+                type="file"
+                className="form-input"
+                accept="image/png,image/jpeg"
+                onChange={(event) => setLogoFile(event.target.files?.[0] ?? null)}
+                aria-describedby="tenant-logo-help"
+              />
+              <small id="tenant-logo-help" style={{ color: 'var(--text-muted)' }}>
+                PNG or JPG, up to 3 MB. This logo will appear on the provider's sign-in page.
+              </small>
             </div>
 
             {/* Subdomain Input with Live Checker */}
