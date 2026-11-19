@@ -48,3 +48,9 @@ This application handles cross-tenant administrative tasks, specifically:
    ```bash
    npm run build
    ```
+
+## Vercel deployment
+
+Set `VITE_API_BASE_URL` in the Vercel project environment to the production backend origin (for example, `https://api.example.com`), then redeploy. Vite embeds this value at build time. If it is missing, API requests use the admin site's own origin. The backend must also allow the admin origin in its CORS configuration.
+
+The included `vercel.json` serves the React app for client-side routes such as `/login`, including direct visits and refreshes. Configure Vercel's project root to point to this admin application so that the configuration is included in the deployment.
