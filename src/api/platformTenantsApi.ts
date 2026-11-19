@@ -30,20 +30,27 @@ export const platformTenantsApi = {
   },
 
   async createTenant(data: CreateTenantRequest): Promise<TenantDetail> {
-    const { logo, ...tenantData } = data;
-    let logoUrl: string | undefined;
-    if (logo) {
-      const form = new FormData();
-      form.append('logo', logo);
-      const uploaded = await apiClient.post<{ logoUrl: string }>('/api/platform/tenants/logo', form, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      logoUrl = uploaded.data.logoUrl;
+    const { logo, owner, ...tenantData } = data;
+    const form = new FormData();
+
+    Object.entries(tenantData).forEach(([key, value]) => {
+      if (value === undefined || value === null || value === '') return;
+      form.append(key, String(value));
+    });
+
+    if (owner) {
+      form.append('Owner.FirstName', owner.firstName);
+      form.append('Owner.LastName', owner.lastName);
+      form.append('Owner.Email', owner.email);
+      if (owner.password) form.append('Owner.Password', owner.password);
     }
 
-    const response = await apiClient.post<TenantDetail>('/api/platform/tenants', {
-      ...tenantData,
-      logoUrl,
+    if (logo) {
+      form.append('Logo', logo);
+    }
+
+    const response = await apiClient.post<TenantDetail>('/api/platform/tenants', form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data;
   },
